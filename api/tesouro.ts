@@ -3,6 +3,9 @@ export default function handler(
   res: any
 ) {
   res.status(200).json({
-    mensagem: "API funcionando!"
+    titulo: "Tesouro Selic 2031",
+    taxa: 14.5,
+    pu: 16782.34,
+    atualizacao: "2026-06-13"
   });
 }
