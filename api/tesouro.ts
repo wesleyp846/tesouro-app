@@ -12,8 +12,17 @@ export default async function handler(
 
   const $ = cheerio.load(html);
 
+  const textos: string[] = [];
+
+  $("strong").each((_, el) => {
+    const texto = $(el).text().trim();
+
+    if (texto) {
+      textos.push(texto);
+    }
+  });
+
   res.status(200).json({
-    tamanhoHtml: html.length,
-    titulo: $("h1").first().text(),
+    encontrados: textos.slice(0, 50)
   });
 }
