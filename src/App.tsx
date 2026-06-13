@@ -1,58 +1,67 @@
-import { useEffect, useState } from "react";
-
-type Tesouro = {
-  titulo: string;
-  taxa: number;
-  pu: number;
-  atualizacao: string;
-};
-
 function App() {
-  const [dados, setDados] = useState<Tesouro | null>(null);
-
-  useEffect(() => {
-    async function carregar() {
-      const response = await fetch("/api/tesouro");
-      const json = await response.json();
-
-      setDados(json);
-    }
-
-    carregar();
-  }, []);
-
-  if (!dados) {
-    return <p>Carregando...</p>;
-  }
+  const iniciarAnalise = () => {
+    window.location.href = "/api/tesouro";
+  };
 
   return (
     <div
       style={{
-        maxWidth: "600px",
-        margin: "40px auto",
-        padding: "20px",
-        border: "1px solid #ccc",
-        borderRadius: "8px",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background:
+          "linear-gradient(135deg,#0f172a,#1e293b)",
       }}
     >
-      <h1>{dados.titulo}</h1>
+      <div
+        style={{
+          background: "#ffffff",
+          padding: "40px",
+          borderRadius: "20px",
+          boxShadow:
+            "0 20px 50px rgba(0,0,0,0.25)",
+          textAlign: "center",
+          width: "90%",
+          maxWidth: "500px",
+        }}
+      >
+        <h1
+          style={{
+            marginBottom: "10px",
+            color: "#0f172a",
+          }}
+        >
+          Análise de Wesley
+        </h1>
 
-      <p>
-        <strong>Taxa:</strong> {dados.taxa}% a.a.
-      </p>
+        <p
+          style={{
+            color: "#64748b",
+            marginBottom: "30px",
+          }}
+        >
+          Tesouro Selic 2031
+        </p>
 
-      <p>
-        <strong>PU:</strong>{" "}
-        {dados.pu.toLocaleString("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-        })}
-      </p>
-
-      <p>
-        <strong>Atualização:</strong>{" "}
-        {dados.atualizacao}
-      </p>
+        <button
+          onClick={iniciarAnalise}
+          style={{
+            border: "none",
+            cursor: "pointer",
+            padding: "15px 30px",
+            borderRadius: "12px",
+            fontSize: "18px",
+            fontWeight: "bold",
+            color: "white",
+            background:
+              "linear-gradient(135deg,#2563eb,#3b82f6)",
+            transition: "0.3s",
+          }}
+        >
+          Iniciar Análise
+        </button>
+      </div>
     </div>
   );
 }

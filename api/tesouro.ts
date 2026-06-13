@@ -12,17 +12,24 @@ export default async function handler(
 
   const $ = cheerio.load(html);
 
-  const textos: string[] = [];
+  const dados: string[] = [];
 
   $("strong").each((_, el) => {
     const texto = $(el).text().trim();
 
     if (texto) {
-      textos.push(texto);
+      dados.push(texto);
     }
   });
 
   res.status(200).json({
-    encontrados: textos.slice(0, 50)
-  });
+  titulo: "Tesouro Selic 2031",
+  valorVenda: dados[0] ?? "N/D",
+  valorCompra: dados[8] ?? "N/D",
+  taxaProjetada: dados[3] ?? "N/D",
+  indexador: dados[5] ?? "N/D",
+  vencimento: dados[6] ?? "N/D",
+  selicAtual: dados[7] ?? "N/D",
+  atualizadoEm: new Date().toLocaleString("pt-BR"),
+});
 }
